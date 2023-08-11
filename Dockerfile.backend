@@ -6,4 +6,4 @@ WORKDIR /
 
 RUN pip install -e ./backend
 
-CMD python ./backend/src/backend/api.py
+CMD python ./backend/src/backend/main.py

@@ -1,7 +1,22 @@
 version: '3.8'
 
 services:
-
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=${DB_USER} # should be postgres - other roles are not defined
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB}
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER}" ]
+      interval: 1s
+      timeout: 1s
+      retries: 10
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      
   frontend:
     build:
       dockerfile: Dockerfile.frontend
@@ -24,3 +39,12 @@ services:
     volumes:
       - ./backend:/backend/
     restart: "on-failure"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB=${DB}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_PORT=${DB_PORT}
+
+volumes:
+  pgdata:

@@ -4,7 +4,7 @@ This is a template project with a FastAPI (Python) backend and a Vite-Vue fronte
 This setup was tested with:
 ```
 @vue/cli 5.0.8
-docker-compose version 1.26.2, build eefe0d31
+docker-compose version 1.26.2
 fastapi==0.101.0
 ```
 

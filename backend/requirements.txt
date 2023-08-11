@@ -1,3 +1,6 @@
-fastapi==0.101.0
-uvicorn==0.14.0
-jinja2
+fastapi
+uvicorn[standard]
+fastapi-users[sqlalchemy]
+psycopg[binary]
+asyncpg 
+#aiosqlite
