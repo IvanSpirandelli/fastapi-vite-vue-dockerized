@@ -3,7 +3,7 @@
     <button @click="getMessage">Get Random Message</button>
     <h1 class="green" data="message">{{ message }}</h1>
     </div>
-    </template>
+  </template>
 
 <script>
 import axios from 'axios'
