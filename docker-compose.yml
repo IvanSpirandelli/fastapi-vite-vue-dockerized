@@ -16,25 +16,13 @@ services:
       retries: 10
     volumes:
       - pgdata:/var/lib/postgresql/data
-      
-  frontend:
-    build:
-      dockerfile: Dockerfile.frontend
-      context: .
-    volumes:
-     - type: bind
-       source: ./frontend
-       target: /app
-     - /app/node_modules
-    ports:
-      - "8080:8080"
-    environment:
-     - CHOKIDAR_USEPOLLING=true
 
   backend:
     build:
       dockerfile: Dockerfile.backend
       context: .
+    depends_on:
+      - postgres
     ports:
       - "1071:1071"
     volumes:
@@ -46,6 +34,22 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
       - DB_PORT=${DB_PORT}
+      
+  frontend:
+    build:
+      dockerfile: Dockerfile.frontend
+      context: .
+    depends_on:
+      - postgres
+    volumes:
+     - type: bind
+       source: ./frontend
+       target: /app
+     - /app/node_modules
+    ports:
+      - "8080:8080"
+    environment:
+     - CHOKIDAR_USEPOLLING=true
 
 volumes:
   pgdata:
