@@ -1,5 +1,6 @@
 # fastapi-vite-vue-dockerized
-This is a template project with a FastAPI (Python) backend and a Vite-Vue frontend. Frontend and backend are dockerized and the template contains  an example of  a get request. 
+This is a template project with a FastAPI (Python) backend and a Vite-Vue frontend. Frontend, Backend and PostgreSQL are dockerized and the template implements 
+a login flow utilizing [FastAPIUsers](https://github.com/fastapi-users/fastapi-users).
 
 This setup was tested with:
 ```
@@ -7,6 +8,7 @@ This setup was tested with:
 docker-compose version 1.26.2
 fastapi==0.101.0
 ```
+
 
 It is intended as a minimal base template.
 
