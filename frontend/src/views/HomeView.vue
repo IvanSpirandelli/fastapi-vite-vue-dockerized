@@ -1,15 +1,8 @@
+<script setup lang="ts">
+    import Login from '../components/Login.vue'
+</script>
+
 <template>
-  <div class="about">
-    <h1>Check the tabs in the navigator for more infos and setup.</h1>
-  </div>
+    <Login/>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>

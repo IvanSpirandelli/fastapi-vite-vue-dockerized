@@ -10,7 +10,6 @@ app = FastAPI()
 
 origins = [
     "http://localhost:8080",
-    "http://0.0.0.0:8080",
 ]
 
 app.add_middleware(
@@ -24,7 +23,7 @@ app.add_middleware(
 app.include_router(default.default_router)
 
 app.include_router(
-    fastapi_users.get_auth_router(auth_backend), prefix="/auth/jwt", tags=["auth"]
+    fastapi_users.get_auth_router(auth_backend), prefix="/auth/token", tags=["auth"]
 )
 app.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),

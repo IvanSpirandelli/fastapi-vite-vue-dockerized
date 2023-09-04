@@ -1,5 +1,5 @@
 import random
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response, status
 
 default_router = APIRouter(
     prefix="",
@@ -20,3 +20,16 @@ def get_random_message():
         "Some memes make me snort."
         ]
     return {"message": messages[random.randint(0, len(messages) - 1)]}
+
+@default_router.get("/get_test_cookie")
+def get_test_cookie():
+    response = Response(status_code=status.HTTP_204_NO_CONTENT)
+    response.set_cookie(
+        key="test", 
+        value="test", 
+        samesite = "lax", 
+        httponly=True, 
+        secure = True,
+        path = "/",
+        domain = None)
+    return response
