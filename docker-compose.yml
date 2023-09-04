@@ -26,8 +26,8 @@ services:
     ports:
       - "1071:1071"
     volumes:
-      - ./backend:/backend/
-    restart: "on-failure"
+      - ./backend:/app/backend/
+    restart: "on-failure:5"
     environment:
       - DB_HOST=${DB_HOST}
       - DB=${DB}
@@ -40,7 +40,7 @@ services:
       dockerfile: Dockerfile.frontend
       context: .
     depends_on:
-      - postgres
+      - backend
     volumes:
      - type: bind
        source: ./frontend

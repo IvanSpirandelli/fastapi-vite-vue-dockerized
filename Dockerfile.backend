@@ -1,8 +1,11 @@
 FROM python:3.9-buster
 
-COPY backend /backend
+COPY backend /app/backend
 
-WORKDIR /
+ENV WATCHFILES_FORCE_POLLING=true
+ENV PYTHONPATH="/"
+
+WORKDIR /app
 
 RUN pip install -e ./backend
 

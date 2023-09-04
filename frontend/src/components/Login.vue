@@ -14,8 +14,12 @@
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
                         <input v-model="password" type="password" name="password" id="password" placeholder="••••••••" required="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
                     </div>
+
+                    <p class="v-model='error_warning' items-center justify-center flex text-sm font-light text-red-500">
+                        {{ error_warning }}
+                    </p>
                     <div class="flex items-center justify-center">
-                        <button @click="signIn" class="bg-transparent text-gray-700 font-semibold hover:text-gray-500 py-2 px-4 border border-gray-500 hover:border-gray-300 rounded-lg">
+                        <button @click="signIn" type="button" class="bg-transparent text-gray-700 font-semibold py-2 px-4 border border-gray-500 hover:border-gray-300 hover:text-gray-500 rounded-lg">
                         Sign in
                         </button>
                     </div>
@@ -36,20 +40,28 @@ export default {
         return {
             email: "",
             password: "",
+            error_warning: "",
         }
     },
     methods: {
         async signIn() {
-            await axios.post('http://0.0.0.0:1071/auth/token/login',
+            await axios.post('http://localhost:1071/auth/token/login',
             {
                 username: this.email,
                 password: this.password
-            },
-            {
-                headers: {'content-type': 'application/x-www-form-urlencoded'}
+            }, {
+                headers: {'content-type': 'application/x-www-form-urlencoded'},
+                withCredentials: true
             }).then(
-                response => this.message = response.data.message,
-                this.$router.push('/info')
+                response => {
+                    if (response.status == 204){
+                        this.$router.push('/dashboard')
+                    }
+                }
+            ).catch(
+                error => {
+                    this.error_warning = "Unkown credentials"
+                }
             )
         }
     }

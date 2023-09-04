@@ -37,7 +37,9 @@ async def get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(get_user_db
     yield UserManager(user_db)
 
 
-cookie_transport = CookieTransport(cookie_max_age=3600, cookie_secure = False) #tokenUrl="auth/jwt/login"
+cookie_transport = CookieTransport(
+    cookie_secure=False, # TODO: Change to True in production
+)
 
 def get_database_strategy(
     access_token_db: AccessTokenDatabase[AccessToken] = Depends(get_access_token_db),
